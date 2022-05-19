@@ -1,0 +1,84 @@
+{% extends 'blog/blog_base.html' %}
+{% load static %}
+<meta charset="utf-8">
+<meta name="author" content="ALL PC Solutions">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="All PC Solutions - Download Free Resources To Unleash Your Creative Power ...! Amazing site to download free Premium and Paid Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WordPress Themes Online Tutorials and much more ... Download Online Paid Course for free download from platforms like Udemy, Skillshare, Pluralsight, Linkedin, Coursera, Frontend Masters, CodewithMosh, ZeroToMastery, Coding Ninjas, Academind, acloudguru, Linux Academy, Awwwards, CleanCoders, egghead, Newline, Pluralsight, Udacity, UltimateCourses. Free download free Windows OS, Mac Os Apps, Plugins and softwares. Free download Premium VFX or Motion Graphics Templates. Motion Graphics Templates DaVinci Resolve, After Effects, CENEMA 4D, Adobe Premiere Pro, Magix Vegas Pro, Blender. Free download Premium Templates. Graphics Design Templates Photoshop Psd, Adobe Illustrator, Corel Draw, Adobe InDesign, Power Point Infographics. Free download Premium WordPress Themes, HTML Templates" />
+<meta property="og:title" content="Free download Premium WordPress Themes, HTML Templates, themeforest, envato elements, Most Popular WP Template, elegantthemes, templatemonster, motionarray, VFX or Motion Graphics Templates, download Udemy courses free">
+
+<meta property="og:type" content="WordPress Themes, HTML Templates, themeforest, envato elements, Most Popular WP Template, elegantthemes, templatemonster, motionarray, VFX or Motion Graphics Templates, download Udemy courses free, Udemy courses free, Skillshare courses free, Pluralsight courses free, Linkedin courses free, Coursera courses free, Frontend Masters courses free, CodewithMosh courses free, ZeroToMastery courses free, Coding Ninjas courses free, Academind courses free, acloudguru, Linux Academy, Awwwards, CleanCoders, egghead, Newline, Pluralsight, Udacity, UltimateCourses, DaVinci Resolve Motion Graphics Templates, After Effects Motion Graphics Templates, CENEMA 4D Motion Graphics Templates, Adobe Premiere Pro Motion Graphics Templates, Magix Vegas Pro Templates, Blender, Graphics Templates Photoshop Psd, Adobe Illustrator Graphics Templates , Corel Draw Graphics Templates , Adobe InDesign Graphics Templates , Power Point Infographics">
+<meta property="og:url" content="www.allpcsolutions.net, allpcsolutions.net, allpcsolutions, www.allpcsolutions.net ">
+
+<!----GOOGLE ADS SCRIPTS-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2597287362755797"
+crossorigin="anonymous"></script>
+{% block title %}
+
+    Home
+{% endblock title %}
+
+{% block content %}
+
+   <!-- Start Blog Area -->
+   <section class="blog-area ptb-100">
+    <div class="container">
+        <div class="row">
+
+            {% if categories %} 
+            {% for category in categories %}          
+            <div class="col-lg-4 col-md-6"> 
+                <div class="single-blog-post-item">
+                    <div class="post-image">
+                        <a href="{{ category.get_absolute_url }}">
+                            <img src="{{ category.image.url }}" alt="image">
+                        </a>
+                        <div style="background-color: rgb(255, 102, 0);" class="date">
+                            <span>{{ category.date_updated }}</span>
+                        </div>
+                    </div>
+                    <div class="post-content">                 
+                        <h3><a style="color: rgb(255, 102, 0);" href="{{ category.get_absolute_url }}">{{ category.name }}</a></h3>
+                        <span class="category">{{ category.description }}</span>
+                        <a href="{{ category.get_absolute_url }}" class="details-btn">Read More...</a>
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+            {% else %}
+            <center><div class="alert alert-warning"><b>No Categories</b></div></center>
+            {% endif %}
+            
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                {% if is_paginated %}
+                <div class="pagination-area text-center">
+                    {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="prev page-numbers"><i class='bx bx-chevron-left'></i></a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}               
+                            <a href="?page={{ num }}" class="page-numbers">{{ num }}</a>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <a href="?page={{ num }}" class="page-numbers">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="next page-numbers"><i class='bx bx-chevron-right'></i></a>
+                    <a class="btn btn-outline-info mb-4"
+                       href="?page={{ page_obj.paginator.num_pages }}">Last
+                    </a>
+                    {% endif %}
+
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End Blog Area -->
+
+
+{% endblock content %}
